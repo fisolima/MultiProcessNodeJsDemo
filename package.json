@@ -1,0 +1,44 @@
+{
+  "name": "basenodejs",
+  "version": "1.0.0",
+  "description": "Empty node js single app with gulp and webpack",
+  "main": "dist/server/startup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Killpippo",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "bootstrap": "^3.3.7",
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^3.5.0",
+    "css-loader": "^0.28.1",
+    "del": "^2.2.2",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^0.11.1",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.8.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-inject": "^4.2.0",
+    "gulp-mocha": "^4.3.0",
+    "gulp-replace": "^0.6.1",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-strip-debug": "^1.1.0",
+    "gulp-uglify": "^2.1.2",
+    "gulp-util": "^3.0.8",
+    "mocha": "^3.2.0",
+    "run-sequence": "^1.2.2",
+    "should": "^11.2.1",
+    "sinon": "^2.1.0",
+    "style-loader": "^0.17.0",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.5.1",
+    "webpack-stream": "^3.2.0"
+  }
+}
