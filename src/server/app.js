@@ -1,6 +1,8 @@
-var express = require('express');
-var path = require('path');
-var HomeController = require('./controllers/homeController');
+const express = require('express');
+const http = require('http');
+const path = require('path');
+const HomeController = require('./controllers/homeController');
+const WebSocketCoordinator = require('./services/webSocketCoordinator');
 
 class App {
     constructor(/*your injection here*/) {
@@ -10,13 +12,14 @@ class App {
         RegisterRoutes(this);
     }
 
-    Start() {
-        // console.log('App.Start');
-        // console.log(path.resolve(__dirname));
-        // console.log(process.argv);
-        this._express.listen(this._port, () => {
-            console.log('listening on ' + this._port);
-        });
+    Start() {        
+        const server = http.createServer(this._express);
+        
+        WebSocketCoordinator.startup(server);
+
+        server.listen(this._port, function listening() {
+            console.log('Listening on %d', server.address().port);
+          });
     }
 }
 
