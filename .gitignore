@@ -24,6 +24,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 dist/
+src/server/config.json
 
 # bower components
 src/client/bower_components/

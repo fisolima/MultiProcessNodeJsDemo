@@ -1,3 +1,4 @@
+var fs = require('fs');
 var gulp = require("gulp");
 var gutil = require('gulp-util');
 var runSequence = require("run-sequence");
@@ -15,6 +16,8 @@ var webpack = require('webpack');
 var webpackProdConfig = require('./webpack.prod.config');
 var gulpReplace = require('gulp-replace');
 var spawn = require('child_process').spawn;
+var apidoc = require('gulp-apidoc');
+var jsdoc = require('gulp-jsdoc3');
 
 var _serverInstance;
 
@@ -82,6 +85,11 @@ gulp.task("server:dev:compile", function() {
                 .pipe(gulp.dest("./dist/server"));
 });
 
+gulp.task("server:config", function() {
+    return gulp.src("./src/server/config.json")
+                .pipe(gulp.dest("./dist/server"));
+});
+
 gulp.task("server:prod:compile", function() {
     return gulp.src("./src/server/**/*.js")
                 .pipe(stripDebug())
@@ -127,6 +135,23 @@ gulp.task("server:run", function () {
     });
 });
 
+gulp.task("doc:clean", function () {
+    return del("dist/documentation/**/*");
+});
+
+gulp.task("doc:api", function(done) {
+    apidoc({
+        src: "src/server/",
+        dest: "dist/documentation/api"
+    },done);
+});
+
+gulp.task('doc:source', function (done) {
+    var config = require('./jsdocConfig.json');
+    gulp.src(['README.md', './src/**/*.js', './src/**/*.es6'], {read: false})
+        .pipe(jsdoc(config, done));
+});
+
 /**
  * Available tasks
  */
@@ -135,6 +160,7 @@ gulp.task("server:dev:build", function (done) {
     runSequence(
         "server:clean",
         "server:dev:compile",
+        "server:config",
         function() {
             done();
         }
@@ -170,9 +196,18 @@ gulp.task("client:prod:build", function (done) {
 
 gulp.task("server:prod:build", function (done) {
     runSequence(
+        "test:clean",
         "server:clean",
         "server:prod:compile",
+        "server:config",
         function() {
+            let packageJson = require('./package.json');
+
+            packageJson.main = 'server/startup.js';
+            packageJson.devDependencies = {};
+
+            fs.writeFileSync('dist/package.json', JSON.stringify(packageJson, null, 2));
+
             done();
         }
     );
@@ -224,6 +259,17 @@ gulp.task("dev:run", function (done) {
                 runSequence("client:dev:build");
             });
 
+            done();
+        }
+    );
+});
+
+gulp.task("doc", function (done) {
+    runSequence(
+        "doc:clean",
+        "doc:api",
+        "doc:source",
+        function () {
             done();
         }
     );
