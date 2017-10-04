@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const HomeController = require('./controllers/homeController');
+const RoomController = require('./controllers/roomController');
 const WebSocketCoordinator = require('./services/webSocketCoordinator');
 const RoomManager = require('./services/roomManager');
 var config = require('./config.json');
@@ -43,9 +44,8 @@ function RegisterRoutes(app) {
         res.end();
     });
 
-    const homeController = new HomeController();
-
-    app._express.use(homeController.route);
+    app._express.use((new HomeController()).route);
+    app._express.use((new RoomController()).route);
 
     app._express.use((req, res, next) => {
         next(new Error('[404] Not Found: ' + req.url));

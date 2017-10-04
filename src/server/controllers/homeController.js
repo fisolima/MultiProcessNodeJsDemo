@@ -1,4 +1,4 @@
-var BaseController = require('./baseController');
+const BaseController = require('./baseController');
 
 class HomeController extends BaseController {
     constructor() {

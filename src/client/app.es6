@@ -1,3 +1,7 @@
+import Vue from 'vue';
+import {HttpClient} from './services/HttpClient';
+
+
 class App {
     constructor(/*your injections here*/) {
         this._container = document.createElement("h3");
@@ -8,27 +12,52 @@ class App {
     Startup() {
         console.log('App.Startup');
 
-        console.log(window.location.href);
+        let self = this;
 
-        const ws = new WebSocket('ws://localhost:3000');
+        let httpClient = new HttpClient(window.location.href);
 
-        ws.onopen = () => {
-            console.log('ws opened');
-        };
+        httpClient.GetJson('api/rooms', null, (err,data) => {
+            if (err)
+                return CatchError(err);
 
-        ws.onmessage = (event) => {
-            console.log(event);
+            self._mainBody = new Vue({
+                el: '#mainBody',
+                data: {
+                    rooms: data
+                },
+                methods: {
+                    switchRoomConnect: function(roomId) {
+                        console.log(roomId);
+                    }
+                }
+            });
+        });        
 
-            this._container.innerHTML = event.data;
-        }
+        //console.log(window.location.href);
 
-        var timer = setInterval(() => {
-            ws.send('client : ' + (new Date()).toString());
-        }, 1500);
+        // const ws = new WebSocket('ws://localhost:3004');
 
-        ws.onclose = () => {
-            clearInterval(timer);
-        }
+        // ws.onopen = () => {
+        //     console.log('ws opened');
+        // };
+
+        // ws.onmessage = (event) => {
+        //     console.log(event);
+
+        //     this._container.innerHTML = event.data;
+        // }
+
+        // var timer = setInterval(() => {
+        //     ws.send('client : ' + (new Date()).toString());
+        // }, 1500);
+
+        // ws.onclose = () => {
+        //     clearInterval(timer);
+        // }
+    }
+
+    CatchError(err) {
+        console.log(err);
     }
 }
 

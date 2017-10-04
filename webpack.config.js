@@ -30,6 +30,9 @@ module.exports = {
     },
     devtool: 'source-map',
     resolve: {
+        alias: {
+            vue$: 'vue/dist/vue.esm.js'
+        },
         extensions: ['.js', '.es6']
     },
     entry: './src/client/startup.es6',
