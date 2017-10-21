@@ -30,12 +30,11 @@
             </nav>
         </header>
 
-        <div id="mainBody" class="container clear-top">
+        <div id="mainBody" class="rooms container clear-top">
             <div v-for="room in rooms">
-                <span>{{room.name}}</span>
-                <button v-on:click="switchRoomConnect(room.id)">Connect</button>
+                <room-component :room="room"></room-component>
             </div>
-            </ul>
+            <textarea class="col-sm-12" id="output"></textarea>
         </div>
         
         <footer class="navbar navbar-default navbar-fixed-bottom">
@@ -43,6 +42,19 @@
                 <p class="text-muted credit">This example is provided by <a href="http://fisodev.com">Killpippo</a></p>
             </div>
         </footer>
+
+        <script type="text/x-template" id="room-template">
+            <div class="col-sm-3">
+                <div class="room" v-bind:class="$props.room.name">
+                    <h3>{{room.name}}</h3>
+                    <button v-on:click="switchRoomConnect(room.id)"
+                        class="btn "
+                        v-html="connected ? 'Disconnect' : 'Connect'"
+                        v-bind:class="{'btn-primary': !connected, 'btn-danger': connected}"></button>
+                </div>
+            </div>
+        </script>
+
         <!-- inject:js -->
         <!-- endinject -->
     </body>

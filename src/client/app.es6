@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import {HttpClient} from './services/HttpClient';
+import Room from './components/roomComponent';
 
+console.log(Room);
 
 class App {
     constructor(/*your injections here*/) {
@@ -25,10 +27,8 @@ class App {
                 data: {
                     rooms: data
                 },
-                methods: {
-                    switchRoomConnect: function(roomId) {
-                        console.log(roomId);
-                    }
+                components: {
+                    'room-component': Room
                 }
             });
         });        

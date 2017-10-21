@@ -4,3 +4,58 @@ body, html {
     padding-top: 25px;
     padding-bottom: 25px;
 }
+
+.rooms {
+    margin-top: 10px;
+    display: table;
+}
+
+.room {
+    border: 1px solid black;
+    border-radius: 5px;
+    display: table-cell;
+    vertical-align: middle;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    width: 230px;
+}
+
+.room button,h3 {
+    width: 100%;
+    text-align: center;
+}
+
+#output {
+    margin-top: 10px;
+    width: 100%;
+    height: 500px;
+    resize: none;
+}
+
+.bronze {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f8cd71), to(#fff));
+    background-image: -webkit-linear-gradient(top, #f8cd71, #fff);
+    background-image: -moz-linear-gradient(top, #f8cd71, #fff);
+    background-image: linear-gradient(to bottom, #f8cd71, #fff);
+}
+
+.silver {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#c9c9c9), to(#fff));
+    background-image: -webkit-linear-gradient(top, #c9c9c9, #fff);
+    background-image: -moz-linear-gradient(top, #c9c9c9, #fff);
+    background-image: linear-gradient(to bottom, #c9c9c9, #fff);
+}
+
+.gold {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fff238), to(#fff));
+    background-image: -webkit-linear-gradient(top, #fff238, #fff);
+    background-image: -moz-linear-gradient(top, #fff238, #fff);
+    background-image: linear-gradient(to bottom, #fff238, #fff);
+}
+
+.platinum {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#b9b9b9), to(#fff));
+    background-image: -webkit-linear-gradient(top, #b9b9b9, #fff);
+    background-image: -moz-linear-gradient(top, #b9b9b9, #fff);
+    background-image: linear-gradient(to bottom, #b9b9b9, #fff);
+}
