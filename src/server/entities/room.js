@@ -16,12 +16,18 @@ class Room {
         console.log('RoomModule: ' + roomProcessModule);
 
         this._roomProcess = fork(roomProcessModule, [this._name]);
+
+        this._roomProcess.on('message', (m) => {
+            console.log(`[${this._name}] - ` + m);
+        });
     }
 
-    EnterClient(clientConnection) {
-        this._roomProcess.send('client', clientConnection);
-        this._clients.push(clientConnection);
+    EnterClient(ws) {
+        this._roomProcess.send('client', ws._socket);
+        this._clients.push(ws);
     }
 }
+
+
 
 module.exports = Room;

@@ -1,16 +1,21 @@
 
 class ClientConnection {
-    constructor(wsSocket) {
+    constructor(wsSocket, incomingCallback) {
         this._ws = wsSocket;
 
-        this._ws.on('message', function incoming(message) {
+        incomingCallback = incomingCallback || ((message) => {
             console.log('received: ' + message.toString());
           });
+
+        this._ws.on('message', incomingCallback);
     }
 
-    SendMessage(message) {
+    SendMessage(message, errorCallback) {
         this._ws.send(message, (err) => {
-            console.log('error sending message' + JSON.stringify(err));
+            if (errorCallback)
+                errorCallback(err);
+            else
+                console.log('Error sending message' + JSON.stringify(err));
         });
     }
 }

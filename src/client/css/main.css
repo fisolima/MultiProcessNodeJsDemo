@@ -2,7 +2,7 @@ body, html {
     width: 100%;
     height: 100%;
     padding-top: 25px;
-    padding-bottom: 25px;
+    padding-bottom: 50px;
 }
 
 .rooms {
@@ -23,6 +23,7 @@ body, html {
 .room button,h3 {
     width: 100%;
     text-align: center;
+    transition: all 500ms;
 }
 
 #output {
@@ -30,6 +31,10 @@ body, html {
     width: 100%;
     height: 500px;
     resize: none;
+    overflow: auto;
+    border: 1px solid rgb(141, 138, 138);
+    background-color: black;
+    list-style-type: none;
 }
 
 .bronze {
@@ -39,11 +44,19 @@ body, html {
     background-image: linear-gradient(to bottom, #f8cd71, #fff);
 }
 
+.bronzeMsg {
+    color: #f8cd71;
+}
+
 .silver {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#c9c9c9), to(#fff));
     background-image: -webkit-linear-gradient(top, #c9c9c9, #fff);
     background-image: -moz-linear-gradient(top, #c9c9c9, #fff);
     background-image: linear-gradient(to bottom, #c9c9c9, #fff);
+}
+
+.silverMsg {
+    color: #c9c9c9;
 }
 
 .gold {
@@ -53,9 +66,17 @@ body, html {
     background-image: linear-gradient(to bottom, #fff238, #fff);
 }
 
+.goldMsg {
+    color: #fff238;
+}
+
 .platinum {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#b9b9b9), to(#fff));
     background-image: -webkit-linear-gradient(top, #b9b9b9, #fff);
     background-image: -moz-linear-gradient(top, #b9b9b9, #fff);
     background-image: linear-gradient(to bottom, #b9b9b9, #fff);
+}
+
+.platinumMsg {
+    color: #b9b9b9;
 }

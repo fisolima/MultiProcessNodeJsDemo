@@ -31,7 +31,7 @@ module.exports = {
     devtool: 'source-map',
     resolve: {
         alias: {
-            vue$: 'vue/dist/vue.esm.js'
+            vue$: 'vue/dist/vue.min.js'
         },
         extensions: ['.js', '.es6']
     },
