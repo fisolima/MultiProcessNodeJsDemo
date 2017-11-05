@@ -20,10 +20,27 @@ body, html {
     width: 230px;
 }
 
-.room button,h3 {
+.room > button,h3 {
     width: 100%;
     text-align: center;
     transition: all 500ms;
+}
+
+.chatSendBox {
+    display: inline;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-bottom: 5px;
+}
+
+.chatSendBox > input {
+    width: 63%;
+    height: 30px;
+}
+
+.chatSendBox > button {
+    width: 27%;
+    height: 30px;
 }
 
 #output {

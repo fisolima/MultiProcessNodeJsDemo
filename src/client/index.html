@@ -51,6 +51,11 @@
                         class="btn "
                         v-html="connected ? 'Disconnect' : 'Connect'"
                         v-bind:class="{'btn-primary': !connected, 'btn-danger': connected}"></button>
+                    <p v-html="clientId"></p>
+                    <div class="chatSendBox">
+                        <input type="text" v-model="message" placeholder="Send a message" />
+                        <button v-on:click="sendMessage()" class="btn">Send</button>
+                    </div>
                 </div>
             </div>
         </script>

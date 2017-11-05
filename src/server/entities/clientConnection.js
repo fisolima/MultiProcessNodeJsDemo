@@ -1,21 +1,42 @@
 
+
 class ClientConnection {
-    constructor(wsSocket, incomingCallback) {
+    constructor(id, wsSocket) {
+        this._id = id;
         this._ws = wsSocket;
 
-        incomingCallback = incomingCallback || ((message) => {
-            console.log('received: ' + message.toString());
-          });
+        let payload = {
+            type: 'identity',
+            data: id
+        };
 
-        this._ws.on('message', incomingCallback);
+        this._ws.send(JSON.stringify(payload), (err) => {
+            if (err)
+                console.log('Error sending id: ' + JSON.stringify(err));
+        });
     }
 
-    SendMessage(message, errorCallback) {
-        this._ws.send(message, (err) => {
-            if (errorCallback)
-                errorCallback(err);
-            else
-                console.log('Error sending message' + JSON.stringify(err));
+    OnMessage(callback) {
+        this._ws.on('message', (data) => {
+            callback(this._id, data);
+        });
+    }
+
+    OnClose(callback) {
+        this._ws.on('close', () => {
+            callback(this._id);
+        });
+    }
+
+    SendMessage(message) {
+        let payload = {
+            type: 'message',
+            data: message || ''
+        };
+
+        this._ws.send(JSON.stringify(payload), (err) => {
+            if (err)
+                console.log('Error sending message: ' + JSON.stringify(err));
         });
     }
 }

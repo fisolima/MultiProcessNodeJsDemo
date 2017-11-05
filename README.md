@@ -3,7 +3,7 @@
 ## Introduction
 This project is a demonstration how to manage full duplex connection from browser on a multi-process distributed clients.
 
-This project uses [gulp](http://http://gulpjs.com) to manage tasks and [webpack](https://webpack.js.org) to manage client packages.
+In the example, four chat rooms are available, each room is managed by dedicated process.
 
 ## Installation
  * Ensure [node js](https://nodejs.org) and [npm](https://www.npmjs.com/) are installed. Nodejs version 6.9.5 has been used for this project

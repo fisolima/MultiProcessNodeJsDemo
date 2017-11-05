@@ -5,8 +5,7 @@ const path = require('path');
 class Room {
     constructor(roomName) {
         this._name = roomName;
-        this._id = uuidv4();        
-        this._clients = [];
+        this._id = uuidv4();
 
         let roomProcessModule =
             path.join(
@@ -24,10 +23,7 @@ class Room {
 
     EnterClient(ws) {
         this._roomProcess.send('client', ws._socket);
-        this._clients.push(ws);
     }
 }
-
-
 
 module.exports = Room;

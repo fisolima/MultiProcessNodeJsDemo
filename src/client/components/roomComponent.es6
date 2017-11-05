@@ -5,6 +5,8 @@ var Room = {
     props: ['room'],
     data() {
         return {
+            clientId: 'not defined',
+            message: '',
             ws: null,
             connected: false
         };
@@ -16,6 +18,8 @@ var Room = {
                     this.ws.close();
 
                 this.ws = null;
+
+                this.clientId = 'not defined';
             }
             else {
                 let wsUrl = window.location.href.replace('http', 'ws');
@@ -29,7 +33,20 @@ var Room = {
                 };
 
                 this.ws.onmessage = (event) => {
-                    ServerMessageHandler.ProcessMessage(this.room, event.data);
+                    let payload = JSON.parse(event.data);
+
+                    switch (payload.type) {
+                        case 'message':
+                            ServerMessageHandler.ProcessMessage(this.room, payload.data);
+                            break;
+                        case 'identity':
+                            this.clientId = payload.data;
+                            break;
+                        default:
+                            ServerMessageHandler.ProcessMessage(this.room, `Wrong data format: ${event.data}`);
+                            break;
+                    }
+                    
                 }
 
                 this.ws.onclose = () => {
@@ -37,7 +54,13 @@ var Room = {
                 }
             }
 
-            this.connected = !this.connected;            
+            this.connected = !this.connected;
+        },
+        sendMessage: function() {
+            if (!this.connected)
+                return;
+
+            this.ws.send(this.message);
         }
     }
 };
